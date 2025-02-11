@@ -1,4 +1,4 @@
-package com.deichor;
+package com.deichor.questapi.core;
 
 public class Main {
     public static void main(String[] args) {
