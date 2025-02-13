@@ -1,5 +1,7 @@
 plugins {
     id("java")
+    id("io.freefair.lombok") version "8.4"
+    id("test-configuration")
 }
 
 group = "com.deichor.questapi.core"
@@ -10,10 +12,6 @@ repositories {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-}
-
-tasks.test {
-    useJUnitPlatform()
+    compileOnly("org.projectlombok:lombok:${Versions.lombok}")
+    annotationProcessor("org.projectlombok:lombok:${Versions.lombok}")
 }
