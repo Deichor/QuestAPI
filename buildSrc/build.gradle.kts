@@ -8,5 +8,5 @@ repositories {
 }
 
 dependencies {
-
+    implementation("co.uzzu.dotenv:gradle:4.0.0")
 }
