@@ -6,4 +6,7 @@ object Versions {
 
     //paper
     const val paper = "2.0.0-beta.14"
+
+    //yaml
+    const val yaml_resource_bundle = "2.13.0"
 }
