@@ -3,10 +3,25 @@ plugins {
 }
 
 repositories {
-    mavenCentral()
     gradlePluginPortal()
 }
 
 dependencies {
-    implementation("co.uzzu.dotenv:gradle:4.0.0")
+    implementation("net.kyori:indra-git:3.1.3")
+    implementation("com.google.guava:guava:33.3.1-jre")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.10")
+}
+
+sourceSets {
+    main {
+        java.setSrcDirs(emptyList<String>())
+        groovy.setSrcDirs(emptyList<String>())
+        resources.setSrcDirs(emptyList<String>())
+    }
+    test {
+        java.setSrcDirs(emptyList<String>())
+        kotlin.setSrcDirs(emptyList<String>())
+        groovy.setSrcDirs(emptyList<String>())
+        resources.setSrcDirs(emptyList<String>())
+    }
 }

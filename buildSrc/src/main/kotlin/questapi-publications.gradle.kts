@@ -1,7 +1,6 @@
 plugins {
     id("java-library")
     id("maven-publish")
-    id("co.uzzu.dotenv.gradle")
 }
 
 group = "com.deichor"
@@ -19,8 +18,8 @@ publishing {
         maven(
             name = "repooyunzor",
             url = "https://repo.oyunzor.com",
-            username = env.fetchOrNull("oz.reposilite.user") ?: System.getenv("USERNAME"),
-            password = env.fetchOrNull("oz.reposilite.token") ?: System.getenv("TOKEN"),
+            username = EnvLoader.getRequired("oz.reposilite.user"),
+            password = EnvLoader.getRequired("oz.reposilite.token"),
             snapshots = true,
             beta = true,
         )
@@ -57,8 +56,8 @@ fun RepositoryHandler.maven(
             else uri("$url/releases")
 
         this.credentials {
-            this.username = System.getenv(username)
-            this.password = System.getenv(password)
+            this.username = EnvLoader.getRequired("oz.reposilite.user")
+            this.password = EnvLoader.getRequired("oz.reposilite.token")
         }
     }
 }
