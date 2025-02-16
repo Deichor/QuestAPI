@@ -3,3 +3,4 @@ plugins {
 }
 rootProject.name = "QuestAPI"
 include("core")
+include("paper")
