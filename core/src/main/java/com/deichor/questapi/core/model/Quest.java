@@ -4,10 +4,9 @@ import java.util.List;
 
 public interface Quest {
     
-    QuestOwner getOwner();
-    List<QuestReward> getRewards();
+    QuestOwner<?> getOwner();
+    List<QuestReward<?, ? extends QuestOwner<?>>> getRewards();
     List<QuestRequirement> getRequirements();
-    QuestType getType();
 
     void start();
     void complete();

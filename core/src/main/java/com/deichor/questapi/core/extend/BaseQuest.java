@@ -10,10 +10,10 @@ import com.deichor.questapi.core.model.QuestReward;
 
 public abstract class BaseQuest implements Quest {
 
-    private QuestOwner owner;
+    private QuestOwner<?> owner;
     private boolean isComplete;
-    private List<QuestRequirement> requirements = new ArrayList<>();
-    private List<QuestReward> rewards = new ArrayList<>();
+    private final List<QuestRequirement> requirements = new ArrayList<>();
+    private final List<QuestReward<?, ? extends QuestOwner<?>>> rewards = new ArrayList<>();
 
     @Override
     public void complete() {
@@ -21,7 +21,7 @@ public abstract class BaseQuest implements Quest {
     }
 
     @Override
-    public QuestOwner getOwner() {
+    public QuestOwner<?> getOwner() {
         return this.owner;
     }
 
@@ -31,7 +31,7 @@ public abstract class BaseQuest implements Quest {
     }
 
     @Override
-    public List<QuestReward> getRewards() {
+    public List<QuestReward<?, ? extends QuestOwner<?>>> getRewards() {
         return this.rewards;
     }
 

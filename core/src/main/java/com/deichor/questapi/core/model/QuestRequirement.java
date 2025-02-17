@@ -2,7 +2,7 @@ package com.deichor.questapi.core.model;
 
 public interface QuestRequirement {
 
-    String getName();
+    RequirementType getType();
     void addProgress(int progress);
     int getProgress();
     void complete();
