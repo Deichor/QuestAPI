@@ -18,8 +18,8 @@ publishing {
         maven(
             name = "repooyunzor",
             url = "https://repo.oyunzor.com",
-            username = EnvLoader.getRequired("oz.reposilite.user"),
-            password = EnvLoader.getRequired("oz.reposilite.token"),
+            username = EnvLoader.getRequired("OZ_REPOSILITE_USER"),
+            password = EnvLoader.getRequired("OZ_REPOSILITE_TOKEN"),
             snapshots = true,
             beta = true,
         )

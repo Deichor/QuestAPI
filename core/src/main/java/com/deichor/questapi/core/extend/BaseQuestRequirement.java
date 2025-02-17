@@ -6,7 +6,6 @@ public abstract class BaseQuestRequirement implements QuestRequirement {
 
     private int progress;
     private boolean complete;
-    private String name;
 
     @Override
     public void addProgress(int progress) {
@@ -16,11 +15,6 @@ public abstract class BaseQuestRequirement implements QuestRequirement {
     @Override
     public void complete() {
         this.complete = true;
-    }
-
-    @Override
-    public String getName() {
-        return this.name;
     }
 
     @Override
