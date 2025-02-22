@@ -1,7 +1,7 @@
 package com.deichor.questapi.paper;
 
-import com.deichor.questapi.core.QuestAPI;
-import com.deichor.questapi.core.QuestApiBuilder;
+import com.deichor.questapi.api.QuestAPI;
+import com.deichor.questapi.api.QuestApiBuilder;
 import com.deichor.questapi.core.storage.StorageManager;
 import com.deichor.questapi.core.storage.StorageTypes;
 import org.bukkit.plugin.Plugin;

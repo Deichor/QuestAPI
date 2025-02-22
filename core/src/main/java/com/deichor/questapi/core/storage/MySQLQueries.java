@@ -21,7 +21,7 @@ public final class MySQLQueries {
             owner_type VARCHAR(50),
             quest_data TEXT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (owner_id) 
+            FOREIGN KEY (owner_id)
                 REFERENCES quest_owners(id)
                 ON DELETE CASCADE,
             INDEX owner_idx (owner_id)

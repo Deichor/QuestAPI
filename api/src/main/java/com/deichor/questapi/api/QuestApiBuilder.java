@@ -1,4 +1,4 @@
-package com.deichor.questapi.core;
+package com.deichor.questapi.api;
 
 import com.deichor.questapi.core.storage.DatabaseConfig;
 import com.deichor.questapi.core.storage.StorageManager;

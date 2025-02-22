@@ -5,3 +5,4 @@ rootProject.name = "QuestAPI"
 include(":core")
 include(":paper")
 include(":localization")
+include("api")
