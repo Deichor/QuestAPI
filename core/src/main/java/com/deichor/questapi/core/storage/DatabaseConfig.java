@@ -39,7 +39,7 @@ public class DatabaseConfig {
     
     public String getJdbcUrl() {
         if (isSqlite) {
-            return String.format("jdbc:sqlite:%s", sqlitePath);
+            return "jdbc:sqlite:" + sqlitePath;
         }
         return String.format("jdbc:mysql://%s:%d/%s", host, port, database);
     }

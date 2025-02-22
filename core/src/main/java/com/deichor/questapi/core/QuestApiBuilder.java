@@ -49,6 +49,9 @@ public class QuestApiBuilder {
                 }
                 config = new DatabaseConfig(sqlitePath);
             }
+            case IN_MEMORY -> {
+                // InMemory için config gerekmez
+            }
         }
         
         this.storageManager = new StorageManager(storageType, config);
