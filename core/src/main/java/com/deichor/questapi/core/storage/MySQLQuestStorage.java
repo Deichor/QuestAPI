@@ -38,14 +38,37 @@ public class MySQLQuestStorage implements QuestStorage {
         }
     }
 
-    private void saveOrUpdateOwner(Connection conn, QuestOwner<?> owner) throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement(MySQLQueries.INSERT_OR_UPDATE_OWNER)) {
-            stmt.setString(1, owner.getOwnerId());
-            stmt.setString(2, owner.getOwnerType());
+    private Long saveOrUpdateOwner(Connection conn, QuestOwner<?> owner) throws SQLException {
+        // Check if owner already has an ID in the database using getOwnerId()
+        Long ownerId = owner.getId();
+        if (ownerId != null) {
+            // Look up the database ID using the owner ID
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT id FROM quest_owners WHERE owner_id = ? AND owner_type = ?")) {
+                stmt.setLong(1, ownerId);
+                stmt.setString(2, owner.getOwnerType());
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getLong("id");
+                    }
+                }
+            }
+        }
+
+        // If we get here, we need to insert a new owner
+        try (PreparedStatement stmt = conn.prepareStatement(MySQLQueries.INSERT_OR_UPDATE_OWNER, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, owner.getOwnerType());
             String ownerContent = serializeOwner(owner);
+            stmt.setString(2, ownerContent);
             stmt.setString(3, ownerContent);
-            stmt.setString(4, ownerContent);
             stmt.executeUpdate();
+
+            // Get the generated ID
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    return rs.getLong(1);
+                }
+                throw new SQLException("Failed to get generated owner ID");
+            }
         }
     }
 
@@ -55,13 +78,13 @@ public class MySQLQuestStorage implements QuestStorage {
             try (Connection conn = dataSource.getConnection()) {
                 conn.setAutoCommit(false);
                 try {
-                    // First save/update the owner
-                    saveOrUpdateOwner(conn, quest.getQuest().getOwner());
+                    // First save/update the owner and get its ID
+                    Long ownerId = saveOrUpdateOwner(conn, quest.getQuest().getOwner());
                     
                     // Then save/update the quest
-                    try (                 PreparedStatement stmt = conn.prepareStatement(MySQLQueries.INSERT_OR_UPDATE_QUEST)) {
+                    try (PreparedStatement stmt = conn.prepareStatement(MySQLQueries.INSERT_OR_UPDATE_QUEST)) {
                         stmt.setInt(1, questId);
-                        stmt.setString(2, quest.getQuest().getOwner().getOwnerId());
+                        stmt.setLong(2, ownerId);
                         stmt.setString(3, quest.getQuest().getOwner().getOwnerType());
                         String serializedQuest = serializeQuest(quest);
                         stmt.setString(4, serializedQuest);
@@ -100,7 +123,7 @@ public class MySQLQuestStorage implements QuestStorage {
         CompletableFuture.runAsync(() -> {
             try (Connection conn = dataSource.getConnection();
                  PreparedStatement stmt = conn.prepareStatement(MySQLQueries.DELETE_OWNER)) {
-                stmt.setString(1, owner.getOwnerId());
+                stmt.setLong(1, owner.getId());
                 stmt.setString(2, owner.getOwnerType());
                 stmt.executeUpdate(); // Will cascade delete all related quests
             } catch (SQLException e) {
@@ -132,7 +155,7 @@ public class MySQLQuestStorage implements QuestStorage {
         List<QuestManager<?>> quests = new ArrayList<>();
         try (Connection conn = dataSource.getConnection();
              PreparedStatement stmt = conn.prepareStatement(MySQLQueries.SELECT_QUESTS_BY_OWNER)) {
-            stmt.setString(1, owner.getOwnerId());
+            stmt.setLong(1, owner.getId());
             stmt.setString(2, owner.getOwnerType());
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {

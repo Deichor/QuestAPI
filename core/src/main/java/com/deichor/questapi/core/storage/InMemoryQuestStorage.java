@@ -22,7 +22,11 @@ public class InMemoryQuestStorage implements QuestStorage {
 
     @Override
     public void removeQuestsByOwner(QuestOwner<?> owner) {
-
+        quests.entrySet().removeIf(entry -> {
+            QuestOwner<?> questOwner = entry.getValue().getQuest().getOwner();
+            return questOwner.getId().equals(owner.getId())
+                && questOwner.getOwnerType().equals(owner.getOwnerType());
+        });
     }
 
     @Override
@@ -33,7 +37,11 @@ public class InMemoryQuestStorage implements QuestStorage {
     @Override
     public List<QuestManager<?>> getQuestsByOwner(QuestOwner<?> owner) {
         return quests.values().stream()
-                .filter(quest -> quest.getQuest().getOwner().equals(owner))
+                .filter(quest -> {
+                    QuestOwner<?> questOwner = quest.getQuest().getOwner();
+                    return questOwner.getId().equals(owner.getId())
+                        && questOwner.getOwnerType().equals(owner.getOwnerType());
+                })
                 .collect(Collectors.toList());
     }
 
