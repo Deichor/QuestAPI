@@ -56,8 +56,8 @@ fun RepositoryHandler.maven(
             else uri("$url/releases")
 
         this.credentials {
-            this.username = EnvLoader.getRequired("oz.reposilite.user")
-            this.password = EnvLoader.getRequired("oz.reposilite.token")
+            this.username = EnvLoader.getRequired("OZ_REPOSILITE_USER")
+            this.password = EnvLoader.getRequired("OZ_REPOSILITE_TOKEN")
         }
     }
 }
