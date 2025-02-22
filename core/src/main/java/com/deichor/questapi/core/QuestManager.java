@@ -1,28 +1,30 @@
 package com.deichor.questapi.core;
 
 import com.deichor.questapi.core.extend.BaseQuest;
-import com.deichor.questapi.core.model.QuestOwner;
+import com.deichor.questapi.core.model.QuestRequirement;
 
-public abstract class QuestManager {
+public abstract class QuestManager<O> {
 
-    private final BaseQuest quest;
+    private final BaseQuest<O, ?> quest;
 
-    public QuestManager(BaseQuest quest) {
+    public QuestManager(BaseQuest<O, ?> quest) {
         this.quest = quest;
         quest.start();
     }
 
-    protected abstract void giveRewards();
+    public void giveReward(){
+        quest.getRewards().forEach(reward -> reward.giveReward(quest.getOwner()));
+    }
 
     public boolean finishQuest(){
-        if(quest.getRequirements().stream().allMatch(requirement -> requirement.isComplete())){
+        if(quest.getRequirements().stream().allMatch(QuestRequirement::isComplete)){
             quest.complete();
             return true;
         }
         return false;
     }
     
-    protected BaseQuest getQuest() {
+    protected BaseQuest<O, ?> getQuest() {
         return quest;
     }
 }

@@ -3,14 +3,10 @@ package com.deichor.questapi.paper.quest;
 import com.deichor.questapi.core.QuestManager;
 import com.deichor.questapi.core.extend.BaseQuest;
 
-public class PaperQuestManager extends QuestManager {
+public class PaperQuestManager<BukkitPlayerOwner> extends QuestManager<BukkitPlayerOwner> {
 
-    public PaperQuestManager(BaseQuest quest) {
+    public PaperQuestManager(BaseQuest<BukkitPlayerOwner, ?> quest) {
         super(quest);
     }
 
-    @Override
-    protected void giveRewards() {
-
-    }
 }
