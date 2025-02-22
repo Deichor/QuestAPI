@@ -17,7 +17,9 @@ public class SimpleQuestReward<R, O extends QuestOwner<?>> implements QuestRewar
 
     @Override
     public void giveReward(O owner) {
-        rewardAction.accept(owner);
+        if (owner != null && rewardAction != null) {
+            rewardAction.accept(owner);
+        }
     }
 
     @Override

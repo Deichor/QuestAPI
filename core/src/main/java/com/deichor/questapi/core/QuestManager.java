@@ -19,6 +19,7 @@ public abstract class QuestManager<O> {
     public boolean finishQuest(){
         if(quest.getRequirements().stream().allMatch(QuestRequirement::isComplete)){
             quest.complete();
+            giveReward();
             return true;
         }
         return false;
