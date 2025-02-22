@@ -1,7 +1,7 @@
 object TestLibs {
-    const val jupiterApi = "org.junit.jupiter:junit-jupiter-api:${Versions.junit}"
-    const val jupiterEngine = "org.junit.jupiter:junit-jupiter-engine:${Versions.junit}"
-    const val mockitoCore = "org.mockito:mockito-core:${Versions.mockito}"
-    const val mockitoJupiter = "org.mockito:mockito-junit-jupiter:${Versions.mockito}"
-    const val assertjCore = "org.assertj:assertj-core:${Versions.assertj}"
+    const val JUPITER_API = "org.junit.jupiter:junit-jupiter-api:${Versions.JUNIT}"
+    const val JUPITER_ENGINE = "org.junit.jupiter:junit-jupiter-engine:${Versions.JUNIT}"
+    const val MOCKITO_CORE = "org.mockito:mockito-core:${Versions.MOCKITO}"
+    const val MOCKITO_JUPITER = "org.mockito:mockito-junit-jupiter:${Versions.MOCKITO}"
+    const val ASSERTJ_CORE = "org.assertj:assertj-core:${Versions.ASSERTJ}"
 }

@@ -8,5 +8,5 @@ repositories {
 }
 
 dependencies {
-    implementation("dev.akkinoc.util", "yaml-resource-bundle", Versions.yaml_resource_bundle)
+    implementation("dev.akkinoc.util", "yaml-resource-bundle", Versions.YAML_RESOURCE_BUNDLE)
 }
