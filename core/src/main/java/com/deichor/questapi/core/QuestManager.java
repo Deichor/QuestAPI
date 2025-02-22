@@ -24,7 +24,7 @@ public abstract class QuestManager<O> {
         return false;
     }
     
-    protected BaseQuest<O, ?> getQuest() {
+    public BaseQuest<O, ?> getQuest() {
         return quest;
     }
 }

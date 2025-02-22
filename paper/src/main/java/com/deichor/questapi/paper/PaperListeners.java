@@ -1,6 +1,5 @@
 package com.deichor.questapi.paper;
 
-import com.deichor.questapi.core.QuestHolder;
 import com.deichor.questapi.paper.quest.owners.PlayerOwner;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
