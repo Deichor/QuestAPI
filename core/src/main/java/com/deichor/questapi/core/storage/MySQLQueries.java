@@ -7,8 +7,7 @@ public final class MySQLQueries {
 
     public static final String CREATE_OWNERS_TABLE = """
         CREATE TABLE IF NOT EXISTS quest_owners (
-            id BIGINT AUTO_INCREMENT PRIMARY KEY,
-            owner_id VARCHAR(255) NOT NULL,
+            owner_id BIGINT AUTO_INCREMENT PRIMARY KEY,
             owner_type VARCHAR(50) NOT NULL,
             owner_content TEXT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
