@@ -46,12 +46,12 @@ Add the repository:
 </repository>
 ```
 
-Core module dependency:
+Api module dependency:
 ```xml
 <dependency>
     <groupId>com.deichor</groupId>
-    <artifactId>questapi-core</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <artifactId>questapi-api</artifactId>
+    <version>0.1.2-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -60,7 +60,7 @@ Paper module dependency:
 <dependency>
     <groupId>com.deichor</groupId>
     <artifactId>questapi-paper</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.1.2-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -74,10 +74,10 @@ repositories {
 }
 ```
 
-Core module dependency:
+Api module dependency:
 ```kotlin
 dependencies {
-    implementation("com.deichor:questapi-core:0.1.1-SNAPSHOT")
+    implementation("com.deichor:questapi-api:0.1.1-SNAPSHOT")
 }
 ```
 
