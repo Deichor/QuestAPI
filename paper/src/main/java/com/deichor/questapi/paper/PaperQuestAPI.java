@@ -2,6 +2,8 @@ package com.deichor.questapi.paper;
 
 import com.deichor.questapi.api.QuestAPI;
 import com.deichor.questapi.api.QuestApiBuilder;
+import com.deichor.questapi.api.quest.DefaultQuestService;
+import com.deichor.questapi.api.quest.QuestService;
 import com.deichor.questapi.core.storage.StorageManager;
 import com.deichor.questapi.core.storage.StorageTypes;
 import org.bukkit.plugin.Plugin;
@@ -11,11 +13,13 @@ public class PaperQuestAPI implements QuestAPI {
     private static PaperQuestAPI INSTANCE;
     private final StorageManager storageManager;
     private final Plugin plugin;
+    private QuestService questService;
 
     private PaperQuestAPI(Plugin plugin) {
         this.plugin = plugin;
         this.plugin.getServer().getPluginManager().registerEvents(new PaperListeners(), plugin);
         this.storageManager = null; // Initially null, will be set by builder
+        this.questService = null;
     }
 
     public static class Builder {
@@ -65,6 +69,7 @@ public class PaperQuestAPI implements QuestAPI {
 
                 StorageManager storageManager = apiBuilder.build().getStorageManager();
                 INSTANCE.setStorageManager(storageManager);
+                INSTANCE.setQuestService();
                 QuestAPI.registerAPI(INSTANCE);
             }
             return INSTANCE;
@@ -100,6 +105,22 @@ public class PaperQuestAPI implements QuestAPI {
             throw new IllegalStateException("StorageManager has not been initialized");
         }
         return storageManager;
+    }
+
+    @Override
+    public QuestService getQuestService() {
+        if(questService == null) {
+            throw new IllegalStateException("QuestService has not been initialized");
+        }
+        return questService;
+    }
+
+    private void setQuestService() {
+        if (this.questService == null) {
+            if(storageManager != null) {
+                this.questService = new DefaultQuestService(this.getStorageManager());
+            }
+        }
     }
 
     @Override

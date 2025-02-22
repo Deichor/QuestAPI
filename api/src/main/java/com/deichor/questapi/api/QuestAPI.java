@@ -1,5 +1,6 @@
 package com.deichor.questapi.api;
 
+import com.deichor.questapi.api.quest.QuestService;
 import com.deichor.questapi.core.storage.StorageManager;
 
 import java.util.ArrayList;
@@ -8,6 +9,8 @@ import java.util.Optional;
 
 public interface QuestAPI {
     StorageManager getStorageManager();
+    
+    QuestService getQuestService();
     
     String getIdentifier();
 
