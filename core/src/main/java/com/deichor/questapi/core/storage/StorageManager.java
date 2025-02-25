@@ -29,7 +29,7 @@ public class StorageManager {
             }
             case SQLITE -> {
                 this.primaryStorage = new SQLiteQuestStorage(config);
-                this.secondaryStorage = new InMemoryQuestStorage();
+                this.secondaryStorage = null;
             }
             default -> throw new IllegalArgumentException("Unsupported storage type: " + storageType);
         }

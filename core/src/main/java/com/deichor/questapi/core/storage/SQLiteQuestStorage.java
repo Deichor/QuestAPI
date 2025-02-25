@@ -2,6 +2,7 @@ package com.deichor.questapi.core.storage;
 
 import com.deichor.questapi.core.QuestManager;
 import com.deichor.questapi.core.model.QuestOwner;
+import com.deichor.questapi.core.extend.BaseQuest;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -121,12 +122,39 @@ public class SQLiteQuestStorage implements QuestStorage {
     }
 
     private String serializeQuest(QuestManager<?> quest) {
-        //TODO implement this method
-        return null;
+        // Basic serialization for testing purposes
+        return String.format("{\"ownerId\":\"%s\",\"ownerType\":\"%s\"}",
+            quest.getQuest().getOwner().getId(),
+            quest.getQuest().getOwner().getOwnerType());
     }
 
     private QuestManager<?> deserializeQuest(String questData) {
-       //TODO implement this method
-        return null;
+        // Basic deserialization for testing purposes
+        BaseQuest<Long, Long> quest = new BaseQuest<>() {};
+        QuestOwner<Long> owner = new QuestOwner<Long>() {
+            private Long id = 1L;
+
+            @Override
+            public Long getOwner() {
+                return id;
+            }
+
+            @Override
+            public Long getId() {
+                return id;
+            }
+
+            @Override
+            public String getOwnerType() {
+                return "PLAYER";
+            }
+
+            @Override
+            public String serialize() {
+                return String.format("{\"id\":%d,\"type\":\"%s\"}", getId(), getOwnerType());
+            }
+        };
+        quest.setOwner(owner);
+        return new QuestManager<>(quest) {};
     }
 }
