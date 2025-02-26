@@ -7,5 +7,6 @@ public interface QuestRequirement {
     int getProgress();
     void complete();
     boolean isComplete();
+    RequirementTrigger<?> getTrigger();
 
 }

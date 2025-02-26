@@ -26,6 +26,6 @@ public abstract class BaseQuestRequirement implements QuestRequirement {
     public boolean isComplete() {
         return this.complete;
     }
-    
+
 
 }
