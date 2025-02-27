@@ -100,8 +100,8 @@ class QuestServiceTest {
     @Test
     void completeQuest_WithCompletedRequirements_ShouldReturnTrue() {
         // Setup completed requirements
-        when(requirement1.isComplete()).thenReturn(true);
-        when(requirement2.isComplete()).thenReturn(true);
+        when(requirement1.isCompleted()).thenReturn(true);
+        when(requirement2.isCompleted()).thenReturn(true);
         
         // Create and setup the quest
         QuestManager<Long> quest = questService.createQuest(owner, 
@@ -123,8 +123,8 @@ class QuestServiceTest {
     @Test
     void completeQuest_WithIncompleteRequirements_ShouldReturnFalse() {
         // Setup incomplete requirements
-        when(requirement1.isComplete()).thenReturn(true);
-        when(requirement2.isComplete()).thenReturn(false);
+        when(requirement1.isCompleted()).thenReturn(true);
+        when(requirement2.isCompleted()).thenReturn(false);
         
         // Create and setup the quest
         QuestManager<Long> quest = questService.createQuest(owner, 
