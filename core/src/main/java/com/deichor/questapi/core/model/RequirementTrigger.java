@@ -9,9 +9,11 @@ package com.deichor.questapi.core.model;
 public abstract class RequirementTrigger<T> {
 
     private final QuestRequirement requirement;
+    private final RequirementCondition condition;
 
-    public RequirementTrigger(QuestRequirement requirement) {
+    public RequirementTrigger(QuestRequirement requirement, RequirementCondition condition) {
         this.requirement = requirement;
+        this.condition = condition;
     }
 
     /**
